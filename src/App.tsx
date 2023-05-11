@@ -12,6 +12,7 @@ import Languages from "features/language/language.types";
 import esTranslations from "data/i18n.es";
 import enTranslations from "data/i18n.en";
 import ptTranslations from "data/i18n.pt";
+import { LenguageContext } from 'contexts/languageContext';
 
 const App: FC = () => {
 
@@ -31,13 +32,15 @@ const App: FC = () => {
   return (
       <Provider store={store}>
         <TrackingProvider>
-            <LanguageComponent language={language} setLanguage={setLanguage} t={translate}/>
-            <Navbar t={translate}/>
+          <LenguageContext.Provider value={{language:language, setLanguage: setLanguage, t:translate}}>
+            <LanguageComponent />
+            <Navbar/>
             <Routes>
               <Route path="/" element={<Page3 />} />
               <Route path="/location/:id" element={<Page2 />} />
               <Route path="/following" element={<Page1 />} />
             </Routes>
+          </LenguageContext.Provider>
         </TrackingProvider>
       </Provider>
   );

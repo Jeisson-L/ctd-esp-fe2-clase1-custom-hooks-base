@@ -1,29 +1,27 @@
-import { FC } from 'react';
-import Languages from "features/language/language.types";
+import { useContext } from 'react';
+import { LenguageContext } from 'contexts/languageContext';
 
-type LanguageComponentProps = {
-    language: Languages
-    setLanguage: (language: Languages) => void
-    t: (key: string) => string;
-}
 
-const LanguageComponent: FC<LanguageComponentProps> = ({language, setLanguage, t}: LanguageComponentProps) => {
+const LanguageComponent = () => {
+
+  const lenguageContext = useContext(LenguageContext);
+
   return (
     <div className={'language'}>
       <div
-        onClick={() => setLanguage('SPANISH')}
-        className={language === 'SPANISH' ? 'language-button active' : 'language-button'}>
-        {t('language.spanish')}
+        onClick={() => lenguageContext?.setLanguage('SPANISH')}
+        className={lenguageContext?.language === 'SPANISH' ? 'language-button active' : 'language-button'}>
+        {lenguageContext?.t('language.spanish')}
       </div>
       <button
-        onClick={() => setLanguage('ENGLISH')}
-        className={language === 'ENGLISH' ? 'language-button active' : 'language-button'}>
-        {t('language.english')}
+        onClick={() => lenguageContext?.setLanguage('ENGLISH')}
+        className={lenguageContext?.language === 'ENGLISH' ? 'language-button active' : 'language-button'}>
+        {lenguageContext?.t('language.english')}
       </button>
       <button
-        onClick={() => setLanguage('PORTUGUESE')}
-        className={language === 'PORTUGUESE' ? 'language-button active' : 'language-button'}>
-        {t('language.portuguese')}
+        onClick={() => lenguageContext?.setLanguage('PORTUGUESE')}
+        className={lenguageContext?.language === 'PORTUGUESE' ? 'language-button active' : 'language-button'}>
+        {lenguageContext?.t('language.portuguese')}
       </button>
     </div>
   );
